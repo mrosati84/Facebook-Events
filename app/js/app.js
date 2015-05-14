@@ -7,7 +7,7 @@
     searchEventsForm.addEventListener('submit', function(ev) {
         ev.preventDefault();
 
-        var searchEventsName = document.getElementById('search-events-name').value;
+        var searchEventsName = document.getElementById('s').value;
 
         FB.api('/search/?q=' + searchEventsName + '&type=event', function(response) {
             console.log(response);
