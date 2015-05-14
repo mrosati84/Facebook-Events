@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     minifyHTML = require('gulp-minify-html'),
     browserSync = require('browser-sync').create(),
     reload = browserSync.reload,
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
     'app': {
@@ -28,7 +29,9 @@ gulp.task('html', function() {
 
 gulp.task('sass', function () {
     gulp.src(paths.app.sass)
+        .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.dist.sass))
         .pipe(reload({ stream: true }));
 });
