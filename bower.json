@@ -8,6 +8,8 @@
   "description": "Search events on Facebook",
   "license": "GPL",
   "dependencies": {
-    "normalize-scss": "3.0.3"
+    "normalize-scss": "3.0.3",
+    "history.js": "1.8.0",
+    "handlebars": "3.0.3"
   }
 }
