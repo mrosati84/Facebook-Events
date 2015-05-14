@@ -44,3 +44,5 @@ gulp.task('serve', ['sass'], function() {
     gulp.watch(paths.app.sass, ['sass']);
     gulp.watch(paths.app.html, ['html']).on('change', reload);
 });
+
+gulp.task('default', ['html', 'sass']);
