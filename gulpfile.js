@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     reload = browserSync.reload,
     sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    del = require('del');
 
 var paths = {
     'app': {
@@ -15,6 +16,10 @@ var paths = {
         'html': 'dist'
     }
 }
+
+gulp.task('clean', function() {
+    del(paths.dist.html);
+});
 
 gulp.task('html', function() {
     var options = {
