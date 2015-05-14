@@ -6,7 +6,89 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '381848765342209', // localhost:9001
+                xfbml      : true,
+                version    : 'v2.3'
+            });
+
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+
+            if (response.status === 'connected') {
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+            } else {
+                document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+            }
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Successful login for: ' + response.name);
+                document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+            });
+        }
+    </script>
     <h1>Facebook events</h1>
+
+    <header>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+        <div id="status"></div>
+    </header>
+
+    <form action="" id="search-events-form" name="search-events-form">
+        <label for="search-events-name">Event name: </label>
+        <input type="search" name="search-events-name" id="search-events-name">
+        <input type="submit" value="Search">
+    </form>
+
+    <script id="tpl-events" type="text/x-handlebars-template">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Start time</th>
+                </tr>
+            </thead>
+            {{#each data}}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ name }}</td>
+                    <td>{{ location }}</td>
+                    <td>{{ start_time }}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </script>
+
+    <div id="events"></div>
 
     <script src="/js/vendor.min.js"></script>
     <script src="/js/app.min.js"></script>
