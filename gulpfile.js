@@ -22,9 +22,9 @@ var paths = {
         'html': 'dist'
     },
     'js:vendor': [
-        'bower_components/handlebars/handlebars.js',
-        'bower_components/handlebars/handlebars.runtime.js',
-        'bower_components/history.js/scripts/uncompressed/history.js'
+        'bower_components/handlebars/handlebars.min.js',
+        'bower_components/handlebars/handlebars.min.runtime.js',
+        'bower_components/history.js/scripts/compressed/history.js'
     ]
 }
 
