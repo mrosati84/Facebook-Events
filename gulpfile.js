@@ -19,17 +19,28 @@ var paths = {
         'sass': 'dist/css',
         'js:app': 'dist/js',
         'js:vendor': 'dist/js',
-        'html': 'dist'
+        'html': 'dist',
+        'fonts': {
+            'glyphicons': 'dist/fonts/bootstrap'
+        }
     },
     'js:vendor': [
         'bower_components/handlebars/handlebars.min.js',
         'bower_components/handlebars/handlebars.min.runtime.js',
         'bower_components/history.js/scripts/compressed/history.js'
-    ]
+    ],
+    'bootstrap': {
+        'glyphicons': 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*.*'
+    }
 }
 
 gulp.task('clean', function() {
     del(paths.dist.html);
+});
+
+gulp.task('copy:glyphicons', function() {
+    return gulp.src(paths.bootstrap.glyphicons)
+        .pipe(gulp.dest(paths.dist.fonts.glyphicons));
 });
 
 gulp.task('js:vendor', function() {
@@ -73,7 +84,7 @@ gulp.task('sass', function () {
         .pipe(reload({ stream: true }));
 });
 
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['html', 'sass', 'js:vendor', 'js:app', 'copy:glyphicons'], function() {
     browserSync.init({
         server: paths.dist.html
     });
@@ -83,4 +94,4 @@ gulp.task('serve', ['sass'], function() {
     gulp.watch(paths.app.html, ['html']).on('change', reload);
 });
 
-gulp.task('default', ['html', 'sass', 'js:vendor', 'js:app']);
+gulp.task('default', ['html', 'sass', 'js:vendor', 'js:app', 'copy:glyphicons']);
