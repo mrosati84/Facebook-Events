@@ -1,0 +1,13 @@
+{
+  "name": "fb-events",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mrosati84/Facebook-Events",
+  "authors": [
+    "Matteo Rosati <mrosati@h-art.it>"
+  ],
+  "description": "Search events on Facebook",
+  "license": "GPL",
+  "dependencies": {
+    "normalize-scss": "3.0.3"
+  }
+}
