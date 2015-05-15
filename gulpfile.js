@@ -27,7 +27,8 @@ var paths = {
     'js:vendor': [
         'bower_components/handlebars/handlebars.min.js',
         'bower_components/handlebars/handlebars.min.runtime.js',
-        'bower_components/history.js/scripts/compressed/history.js'
+        'bower_components/history.js/scripts/compressed/history.js',
+        'bower_components/underscore/underscore.js'
     ],
     'bootstrap': {
         'glyphicons': 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*.*'
