@@ -25,9 +25,11 @@ var paths = {
         }
     },
     'js:vendor': [
+        'bower_components/jquery/dist/jquery.js',
         'bower_components/handlebars/handlebars.min.js',
         'bower_components/handlebars/handlebars.min.runtime.js',
         'bower_components/history.js/scripts/compressed/history.js',
+        'bower_components/q/q.js',
         'bower_components/underscore/underscore.js'
     ],
     'bootstrap': {
@@ -85,7 +87,7 @@ gulp.task('sass', function () {
         .pipe(reload({ stream: true }));
 });
 
-gulp.task('serve', ['html', 'sass', 'js:vendor', 'js:app', 'copy:glyphicons'], function() {
+gulp.task('serve', ['html', 'sass', 'js', 'copy:glyphicons'], function() {
     browserSync.init({
         server: paths.dist.html
     });
