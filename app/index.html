@@ -4,18 +4,30 @@
     <meta charset="UTF-8">
     <title>Facebook Events</title>
     <link rel="stylesheet" href="/css/app.css">
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
 </head>
 <body>
+    <div class="container">
+        <h1><i class="glyphicon glyphicon-cloud"></i> Facebook events <i class="glyphicon glyphicon-cloud"></i></h1>
+
+        <header>
+            <div id="fb-login">
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+            </div>
+        </header>
+
+        <div id="map-canvas"></div>
+    </div>
+
+    <script src="/js/vendor.min.js"></script>
+    <script src="/js/app.min.js"></script>
+
     <script>
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : '381848765342209', // localhost:9001
+                appId      : '381848765342209',
                 xfbml      : true,
                 version    : 'v2.3'
-            });
-
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
             });
         };
 
@@ -26,79 +38,6 @@
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-
-        function statusChangeCallback(response) {
-            console.log(response);
-
-            if (response.status === 'connected') {
-                testAPI();
-
-                // hide the login button
-                document.getElementById('fb-login').style.display = 'none';
-            } else if (response.status === 'not_authorized') {
-                console.log('Please log ' + 'into this app.');
-            } else {
-                console.log('Please log ' + 'into Facebook.');
-            }
-        }
-
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
-        }
-
-        function testAPI() {
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function(response) {
-                console.log('Successful login for: ' + response.name);
-                console.log('Thanks for logging in, ' + response.name + '!');
-            });
-        }
     </script>
-
-    <div class="container">
-        <h1><i class="glyphicon glyphicon-cloud"></i> Facebook events <i class="glyphicon glyphicon-cloud"></i></h1>
-
-        <header>
-            <div id="fb-login">
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-            </div>
-        </header>
-
-        <form class="form-inline" action="" id="search-events-form" name="search-events-form">
-            <div class="form-group">
-                <label for="s">Event name</label>
-                <input class="form-control" placeholder="Try: Pool party" type="search" name="s" id="s">
-                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Search</button>
-            </div>
-        </form>
-
-        <script id="tpl-events" type="text/x-handlebars-template">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Start time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each data}}
-                        <tr>
-                            <td><a target="blank" href="http://www.facebook.com/{{ id }}">{{ name }}</a></td>
-                            <td>{{ location }}</td>
-                            <td>{{ start_time }}</td>
-                        </tr>
-                    {{/each}}
-                </tbody
-            </table>
-        </script>
-
-        <div id="events"></div>
-    </div>
-
-    <script src="/js/vendor.min.js"></script>
-    <script src="/js/app.min.js"></script>
 </body>
 </html>

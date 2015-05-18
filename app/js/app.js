@@ -1,19 +1,11 @@
-(function() {
-    var searchEventsForm = document.getElementById('search-events-form'),
-        events = document.getElementById('events'),
-        tplEventsSource = document.getElementById('tpl-events').innerHTML,
-        tplEvents = Handlebars.compile(tplEventsSource);
+(function(exports) {
+    var mapCanvas = document.getElementById('map-canvas');
 
-    searchEventsForm.addEventListener('submit', function(ev) {
-        ev.preventDefault();
-
-        var searchEventsName = document.getElementById('s').value;
-
-        FB.api('/search/?q=' + searchEventsName + '&type=event', function(response) {
-            console.log(response);
-            events.innerHTML = tplEvents(response);
+    navigator.geolocation.getCurrentPosition(function (position) {
+        var map = new google.maps.Map(mapCanvas, {
+            center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            zoom: 9,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-
-        console.log(searchEventsName.value);
     });
-}());
+}(this));
