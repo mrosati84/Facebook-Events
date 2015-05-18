@@ -1,1 +1,11 @@
 @import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
+
+html,
+body {
+    height: 100%;
+}
+
+#map-canvas {
+    width: 100%;
+    height: 500px;
+}
